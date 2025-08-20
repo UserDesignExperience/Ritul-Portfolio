@@ -1,0 +1,2939 @@
+html {
+  scroll-behavior: smooth;
+}
+
+/* General reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #161513; /* Website background from Figma */
+  color: #ffffff;
+  line-height: 1.5;
+  scroll-behavior: smooth;
+}
+
+/* Header styling */
+.site-header {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  /* Semi-transparent dark background */
+  background: rgba(40, 40, 40, 0.301);
+
+  /* Blur the background behind it */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px); /* Safari support */
+
+  border-bottom: 1px solid rgba(22, 22, 22, 0.05); /* subtle divider */
+}
+
+
+.navbar {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* logo left, links right */
+}
+
+
+/* Logo */
+.logo img {
+  height: 40px;   /* tweak this number based on Figma */
+  width: auto;
+}
+
+
+/* Navigation links */
+/* Navigation links */
+.nav-links {
+  list-style: none;           /* removes bullets */
+  display: flex;              /* makes them horizontal */
+  gap: 75px;                /* spacing between links */
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  display: flex;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #ffffff;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;  /* SemiBold */
+  font-size: 16px;   /* exact from Figma */
+  line-height: 1.5;
+  transition: opacity 0.8s ease;
+}
+
+.nav-links a:hover {
+  color: #FD853A;
+}
+
+
+
+/* Demo sections (for scrolling test) */
+/* Remove the global flex from all sections */
+
+
+/* If you still want a full-viewport demo section somewhere,
+   make it opt-in with a class instead of global: */
+.section-fullscreen {
+  min-height: 100vh;           /* use min-height, not hard height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Base nav styles already set for desktop */
+
+/* Hamburger button (hidden by default on desktop) */
+.hamburger {
+  display: none;
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* ---------- Tablet & Mobile Responsive ---------- */
+@media (max-width: 900px) {
+  /* Show hamburger, hide nav links initially */
+  .hamburger {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 70px; /* height of navbar */
+    right: 0;
+    background: rgba(30, 30, 29, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    flex-direction: column;
+    align-items: flex-start;
+    width: 200px;
+    padding: 1rem;
+    gap: 1rem;
+
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  /* Open state */
+  .nav-links.open {
+    transform: translateX(0);
+  }
+
+  /* Make links full width for easy tapping */
+  .nav-links a {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 0;
+  }
+}
+
+@media (max-width: 500px) {
+  /* Smaller mobile adjustments */
+  .navbar {
+    padding: 0.75rem 1rem;
+  }
+
+  .logo img {
+    height: 32px;
+  }
+
+  .nav-links {
+    width: 100%; /* full width slide-in on tiny screens */
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Hero Section */
+.hero {
+  padding: 5rem 2rem;
+  background-color: #161513;
+  color: #fff;
+}
+
+/* Greeting pill */
+.greeting {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.25rem auto;   /* centered above H1 */
+  background: rgba(255,255,255,0.02);
+  border: 1px solid #3a3a3a;
+  color: #d3d3d3;
+  padding: 0.35rem 1rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+}
+
+
+/* Grid: three-column */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  align-items: center;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Quote */
+.hero-quote {
+  text-align: left;
+  color: #b2b2b2;
+  font-size: 0.95rem;
+}
+
+.quote-icon {
+  display: block;
+  font-size: 2rem;
+  color: #fd853a;
+  margin-bottom: 0.5rem;
+}
+
+/* Center block */
+.hero-center {
+  text-align: center;
+}
+
+.hero-title {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.4rem, 6vw, 4.5rem); /* scales but keeps Figma feel */
+  line-height: 1.1;
+  margin: 0 0 1.75rem 0;
+}
+.hero-center {
+  text-align: center;
+}
+
+
+.hero-title .highlight {
+  color: #fd853a;
+}
+
+/* Portrait */
+/* Portrait wrapper becomes a simple, centered stack */
+.hero-portrait {
+  /* Define the shared width variable here so all children can use it */
+  --w: min(62vw, 640px);
+
+  position: relative;              /* anchor for absolute children */
+  margin-bottom: 1.25rem;
+  display: grid;
+  place-items: center;
+}
+
+.hero-experience .exp-icon img {
+  width: 40px;     /* adjust size */
+  height: 40px;
+  object-fit: contain; /* prevents stretching */
+  display: block;
+  margin-right: 0 auto 8px auto; /* centers above text */
+}
+
+
+
+/* Semicircle (exact gradient) */
+.portrait-bg {
+  width: var(--w);
+  aspect-ratio: 2 / 1;                  /* perfect semicircle */
+  border-radius: 9999px 9999px 0 0;
+  background: linear-gradient(180deg, #AE6149 0%, #161513 100%);
+  position: relative;
+  overflow: visible;                     /* let the image sit on the base */
+}
+
+
+/* Portrait sits ON the base, centered */
+.portrait-img {
+  width: clamp(300px, 26vw, 380px);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(-0.02 * var(--w));   /* uses the shared var now */
+  z-index: 2;
+  object-fit: cover;
+  object-position: center top;
+  -webkit-mask-image: radial-gradient(220% 190% at 50% 200%, #fff 120%, transparent 75%);
+  mask-image: radial-gradient(220% 190% at 50% 200%, #fff 120%, transparent 75%);
+}
+
+/* Overlay the CTA on top of the semicircle/photo */
+.cta-buttons {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+
+  /* Sits near the semicircle base; tune this single value */
+  bottom: calc(0 * var(--w));
+}
+
+/* ============ CTA PILL GROUP (Figma) ============ */
+/* Container: dark, translucent, thin light stroke, big radius, glossy streak */
+.cta-pill {
+  /* this block is already absolutely positioned by your .cta-buttons rules */
+  background: rgba(30, 30, 30, 0.85);
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  padding: 6px;                     /* slim frame around the inner capsules */
+  gap: 10px;                        /* space between the two capsules */
+  align-items: center;
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  position: absolute;               /* already set on .cta-buttons */
+}
+
+/* glossy vertical streak (center highlight) */
+.cta-pill::before {
+  content: "";
+  position: absolute;
+  top: -8%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;                     /* tweak if needed */
+  height: 120%;
+  pointer-events: none;
+  background:
+    radial-gradient(closest-side, rgba(255,255,255,0.55), rgba(255,255,255,0.24) 60%, rgba(255,255,255,0) 70%);
+  filter: blur(6px);
+  opacity: 0.65;
+  border-radius: 999px;
+}
+
+/* inner buttons share styles */
+/* inside .cta */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 16px;      /* ↓ smaller text size */
+  white-space: nowrap;
+  text-decoration: none;
+  padding: 10px 20px;   /* ↓ reduced vertical padding */
+  border-radius: 999px;
+  transition: transform .12s ease, opacity .12s ease;
+  will-change: transform;
+  min-width: 140px;
+}
+
+
+
+/* left capsule — orange with white 2px stroke */
+.cta-primary {
+  background: #FD853A;
+  color: #fff;
+  border: 2px solid #FFFFFF;
+  box-shadow:
+    0 4px 12px rgba(253, 133, 58, 0.45),
+    inset 0 -2px 0 rgba(0,0,0,0.12);
+}
+
+/* arrow icon sizing */
+.cta-arrow { display:inline-block; }
+
+/* right capsule — dark with subtle inner stroke */
+.cta-secondary {
+  background: rgba(39, 39, 39, 0.9);
+  color: #FFFFFF;
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,0.15);
+}
+
+/* hover interactions (subtle) */
+.cta:hover { transform: translateY(-1px); }
+.cta:active { transform: translateY(0); opacity: 0.95; }
+
+/* keep the pill nicely sized on small screens */
+@media (max-width: 520px) {
+  .cta { font-size: 16px; padding: 14px 18px; }
+  .cta-pill::before { width: 90px; }
+}
+
+
+
+/* give the center column extra bottom padding so content below doesn’t collide */
+.hero-center {
+  text-align: center;
+  padding-bottom: 5.5rem;           /* space for the overlaid buttons */
+}
+
+
+
+/* (optional) tiny tweak for very small screens */
+@media (max-width: 500px) {
+  .portrait-img {
+    margin-top: -18%;
+    -webkit-mask-image: radial-gradient(120% 115% at 50% 115%, #fff 67%, transparent 68%);
+    mask-image: radial-gradient(120% 115% at 50% 115%, #fff 67%, transparent 68%);
+  }
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;      /* tighter spacing under the portrait */
+}
+
+
+/* Buttons */
+
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.btn.primary {
+  background: #fd853a;
+  color: #fff;
+}
+
+.btn.primary:hover {
+  opacity: 0.85;
+}
+
+.btn.secondary {
+  background: #2a2a2a;
+  border: 1px solid #555;
+  color: #fff;
+}
+
+.btn.secondary:hover {
+  background: #333;
+}
+
+/* Right Experience */
+.hero-experience {
+  text-align: left;
+  color: #fff;
+}
+
+.exp-icon {
+  font-size: 2rem;
+  color: #fd853a;
+  margin-bottom: 0.5rem;
+}
+
+.hero-experience h2 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.exp-label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: #b2b2b2;
+}
+
+.hero-experience ul {
+  list-style: disc;
+  padding-left: 1.2rem;
+  color: #b2b2b2;
+  font-size: 0.95rem;
+}
+/* Remove bullets from nav and name lists */
+ul, li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Tablet */
+/* Mobile view: show only the center stack */
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 1200px) {
+  .hero-quote,
+  .hero-experience {
+    display: none !important;   /* hide both side blocks */
+  }
+
+  /* keep grid valid with just the center column */
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* scale the portrait cluster smoothly */
+  .hero-portrait { --w: clamp(320px, 86vw, 520px); }
+
+  /* keep CTA above the semicircle base (tweak if you want) */
+  .cta-buttons { bottom: calc(-0.16 * var(--w)); }
+}
+/* Prevent face from cutting on small screens */
+@media (max-width: 1200px) {
+  /* make sure stacking is correct */
+  .portrait-bg  { position: relative; z-index: 1; }
+  .portrait-img { position: absolute; z-index: 2; }
+
+  /* nudge the portrait DOWN a little so the head is clear of the arc */
+  .portrait-img {
+    bottom: calc(-0.06 * var(--w));   /* was ~ -0.02; more negative = lower */
+    -webkit-mask-image: radial-gradient(220% 190% at 50% 200%, #fff 120%, transparent 77%);
+            mask-image: radial-gradient(220% 190% at 50% 200%, #fff 120%, transparent 77%);
+    /* ↑ slightly increases the curve only at the VERY bottom; head unaffected */
+  }
+}
+/* Compact header on phones */
+@media (max-width: 1200px) {
+  .navbar {
+    padding: 8px 12px;      /* tighter than desktop */
+  }
+  .logo img {
+    height: 28px;           /* smaller logo */
+  }
+  .hamburger {
+    font-size: 22px;        /* balance with smaller header */
+  }
+
+  /* trim top padding of hero so content sits closer to header */
+  .hero {
+    padding-top: 0rem;    /* was larger; adjust if you want even tighter */
+  }
+
+  /* greeting pill spacing */
+  .greeting {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+}
+@media (max-width: 1200px) {
+  .hero h1 {
+    margin-bottom: 90px;  /* adds breathing space below text only on mobile */
+  }
+  .hello-btn {
+    margin-bottom: 90px; /* Adds gap below capsule */
+  }
+  /* greeting pill spacing */
+  .greeting {
+   margin-bottom: 25px;   /* ← this is blocking the gap */
+  }
+  :root { --mobHeaderH: 56px; }      /* adjust if your mobile header is taller */
+
+  .site-header {
+    position: fixed;                  /* stays at the very top while scrolling */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: var(--mobHeaderH);
+  }
+
+  /* prevent content from sliding under the fixed header */
+  body {
+    padding-top: var(--mobHeaderH);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ======= Section shell ======= */
+/* ——— Section shell ——— */
+.section.skills-wrap{
+  max-width: 1040px;                   /* Figma container width */
+  margin: 196px auto 120px;                  /* 88 top/btm from your figma capture */
+  padding: 0 24px;
+}
+
+/* ——— Generic card ——— */
+.card{
+  background: #1B1B1B;                 /* card color */
+  border: 1.5px solid #262626;         /* stroke 1–2px */
+  border-radius: 16px;
+  padding: 40px;                        /* side padding = 40 */
+  filter: drop-shadow(0 10px 16px rgba(0,0,0,.30));
+}
+
+/* spacing between cards */
+.card + .card{ margin-top: 24px; }
+
+/* ——— Card titles ——— */
+.card-title{
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.2;
+  text-align: center;
+  color: #F5F5F5;
+  margin: 0 0 48px;                     /* 48 gap title → content */
+}
+
+/* ——— Top Skill Set grid (3 × 2) ——— */
+.skills-grid{
+  list-style: none; margin: 0; padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  align-items: start;
+  column-gap: 80px;                     /* horizontal spacing */
+  row-gap: 130px;                       /* vertical spacing from figma */
+}
+
+.skill{ text-align: center; }
+.skill img{
+  width: 48px; height: 48px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 16px;
+}
+.skill span{
+  display: inline-block;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: none;            /* figma labels are uppercase */
+  color: #828282;
+}
+
+/* ——— Design Toolkit row ——— */
+.card--toolkit{ padding-top: 25px; padding-bottom: 25px; } /* 25 top/btm inner as figma */
+
+.toolkit-row{
+  list-style: none; margin: 0; padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 items now */
+  justify-items: center;
+  align-items: end;
+  gap: 40px;                            /* 40 side/inner gap */
+}
+
+.tool{ text-align: center; }
+.tool img{
+  width: 44px; height: 44px; object-fit: contain;
+  display: block;
+  margin: 0 auto 10px;
+}
+.tool span{
+  display: block;
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  letter-spacing: .06em;
+  color: #808080;                        /* grey labels */
+}
+
+/* ——— Stats ——— */
+.stats{
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.stat-card{
+  background: #1B1B1B;
+  border: 1.5px solid #262626;
+  border-radius: 14px;
+  padding: 28px 24px;
+  text-align: center;
+  filter: drop-shadow(0 10px 16px rgba(0,0,0,.30));
+}
+
+.stat-num{
+  font-family: "Inter", sans-serif;
+  font-weight: 800;
+  color: #FD853A;
+  font-size: 56px;                      /* big orange number (desktop) */
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.stat-label{
+  font-family: "Inter", sans-serif;
+  color: #BDBDBD;
+  font-size: 16px;
+}
+
+/* ——— Responsive scaling (keeps same UI, just fits) ——— */
+@media (max-width: 980px){
+  .section.skills-wrap{ margin: 72px auto; }
+  .skills-grid{ column-gap: 56px; row-gap: 100px; }
+  .stat-num{ font-size: 52px; }
+}
+@media (max-width: 760px){
+  .skills-grid{ grid-template-columns: repeat(2, 1fr); row-gap: 72px; }
+  .toolkit-row{ grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .stats{ grid-template-columns: 1fr; }
+  .stat-num{ font-size: 48px; }
+}
+/* Force the Skills section to stack down the page */
+.section.skills-wrap{
+  display: flex;              /* override any global row flex */
+  flex-direction: column;     /* vertical */
+  gap: 24px;                  /* space between cards */
+  align-items: stretch;       /* cards take full width */
+}
+
+.section.skills-wrap .card,
+.section.skills-wrap .stats{
+  width: 100%;
+}
+/* =========================
+   Compact view: fit all 3 cards in one frame on laptops
+   Triggers only when the screen isn't very tall
+   ========================= */
+@media (min-width: 900px) and (max-height: 900px) {
+  /* outer section spacing */
+  .section.skills-wrap{
+    margin: 40px auto;       /* was 72–88 */
+    gap: 16px;               /* stack spacing between cards */
+  }
+
+  /* card shell */
+  .section.skills-wrap .card{
+    padding: 24px;           /* was 40 */
+  }
+  .section.skills-wrap .card + .card{
+    margin-top: 16px;        /* was 24 */
+  }
+
+  /* card titles */
+  .section.skills-wrap .card-title{
+    font-size: 22px;         /* was 24 */
+    margin-bottom: 24px;     /* was 48 */
+  }
+
+  /* skills grid */
+  .skills-grid{
+    column-gap: 56px;        /* was 80 */
+    row-gap: 56px;           /* was 130 */
+  }
+  .skill img{
+    width: 36px; height: 36px;   /* was 48 */
+    margin-bottom: 10px;
+  }
+  .skill span{
+    font-size: 12px;             /* was 14 */
+    letter-spacing: .08em;
+  }
+
+  /* toolkit row (5 items) */
+  .card--toolkit{ padding-top: 18px; padding-bottom: 18px; }
+  .toolkit-row{ gap: 24px; }     /* was 40 */
+  .tool img{
+    width: 36px; height: 36px;   /* was 44 */
+    margin-bottom: 8px;
+  }
+  .tool span{ font-size: 12px; }
+
+  /* stats */
+  .stats{ gap: 16px; }           /* was 24 */
+  .stat-card{ padding: 16px; }   /* was 28/24 */
+  .stat-num{
+    font-size: 40px;             /* was 56 */
+    margin-bottom: 8px;
+  }
+  .stat-label{ font-size: 14px; }/* was 16 */
+}
+.skills-grid{ row-gap: 48px; }      /* try 48 if needed */
+.stat-num{ font-size: 36px; }       /* try 36 for even tighter stats */
+/* Prevent CTA and Skills from colliding on small screens */
+
+
+@media (max-width: 1200px) {
+  /* Reserve space under the hero for the CTA chip group that overhangs */
+  .hero{
+    padding-top: 80px;
+    padding-bottom: 60px;   /* tweak 110–140px if your CTA height changes */
+  }
+
+  /* tiny nudge so there's a little breathing room before the Skills card */
+  .section.skills-wrap{
+    margin-top: 12px;        /* optional; keep or remove as you like */
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============ WORK SHOWCASE ============ */
+.work{
+  max-width: 980px;              /* was 1100 */
+  margin: 196px auto 120px;        /* was 72 / 64 */
+  padding: 0 20px;               /* was 24 */
+}
+.work-title{
+  font-family: "Inter", sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 24px;               /* was 28 */
+  text-align: center;
+  color: #F5F5F5;
+  margin-bottom: 60px;           /* was 28 */
+}
+
+
+/* top 3 cards grid */
+.work-grid{
+  display: grid;
+  grid-template-columns: 0.9fr 1fr 1.2fr;  /* first a bit narrow, third a bit wide */
+  gap: 20px;                                /* was 24 */
+  margin-bottom: 20px;                      /* was 24 */
+}
+
+
+
+.work-card{
+  background: #1B1B1B;
+  border: 1px solid #262626;     /* thinner */
+  border-radius: 14px;           /* was 16 */
+  padding: 18px;                 /* was 24 */
+  position: relative;
+  filter: drop-shadow(0 10px 16px rgba(0,0,0,.30));
+}
+
+
+/* card headers with orange arrow chip */
+.work-card__head,
+.logo-band__head{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;       /* matches the visual spacing */
+}
+
+.work-card__head h3,
+.logo-band__head h3{
+  font-weight: 600;
+  font-size: 18px;
+  color: #EDEDED;
+}
+
+.chip-arrow{
+  border: none;
+  background: #FD853A;
+  color: #111;
+  width: 28px; height: 28px;     /* was 32 */
+  border-radius: 999px;
+  display: grid; place-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(255, 98, 0, 0.22);
+}
+
+.chip-arrow {
+  width: 32px; 
+  height: 32px;        /* was 28px */
+}
+.chip-arrow span {
+  font-size: 18px;     /* was default ~14px */
+  font-weight: 1000;    /* makes it bolder */
+  transform: translateY(-1px);
+}
+
+
+/* ----- Case Study left card ----- */
+.case-list{ display:grid; gap:16px; }        /* was 20 */
+.case-item__tile{
+  background:#2A2A2A;
+  border-radius:12px;
+  padding:16px;                               /* was 18 */
+  display:grid;
+  grid-template-columns: 1fr auto;
+  align-items:center;
+  gap:14px;                                   /* was 16 */
+  min-height: 104px;                          /* was 120 */
+  
+}
+.case-item__tile img{
+  width: 96px;                                /* was 120 */
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 16px rgba(0,0,0,.30));
+}
+
+
+
+
+.case-item__label{
+  color: #D8D8D8;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .08em;
+  line-height: 1.35;
+}
+.case-item__tile img{
+  width: 80px; height: auto; object-fit: contain;
+  filter: drop-shadow(0 12px 20px rgba(0,0,0,.35));
+}
+
+
+/* ----- UI Projects middle card ----- */
+.ui-stack{ display:grid; gap:22px; padding:6px; }      /* was 26 gap */
+.ui-phones{ width:58%; max-width:300px; margin:0 auto; } /* was 86%/360 */
+.ui-watches{ width:62%; max-width:280px; margin:0 auto; }/* was 78%/340 */
+
+
+/* ----- Web App right card ----- */
+.web-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 32px;   /* was 20px */
+  row-gap: 28px;      /* was 14px */
+}
+
+.web-item img{
+  width:100%;
+  height: 92px;                   /* was auto; previously ~110px */
+  border-radius:0px;
+  display:block;
+  object-fit: cover;
+  
+}
+.web-item__cap{
+  margin-top:30px;                 /* was 8 */
+  font-size:12px;                 /* was 13 */
+  color:#9d9d9d;
+}
+
+
+/* ----- Logo band ----- */
+.logo-band{
+  background:#1B1B1B;
+  border:1px solid #262626;
+  border-radius:16px;
+  padding:18px 20px;             /* was 24 */
+  filter: drop-shadow(0 10px 16px rgba(0,0,0,.30));
+  
+}
+.logo-row{
+  display:grid;
+  grid-template-columns: repeat(7, 1fr);
+  align-items:center;
+  justify-items:center;
+  gap:22px;                      /* was 28 */
+  padding-top:6px;               /* was 8 */
+  
+}
+.logo-item img{
+  width:52px; height:42px;       /* was 60 */
+  object-fit:contain;
+  display:block;
+  margin:0 auto 9px;             /* was 8 */
+}
+.logo-item {
+  text-align: center;   /* centers text + image */
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* ensures both image and text are centered */
+  justify-content: center;
+  
+}
+
+.logo-item span{
+  display:block;
+  font-size:12px;                /* was 13 */
+  color:#CFCFCF;
+  
+}
+
+
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px){
+  .work{ padding: 0 20px; }
+}
+@media (max-width: 980px){
+  .work-grid{ grid-template-columns: 1fr; }
+  .ui-phones, .ui-watches{ width: 92%; }
+  .logo-row{ grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 600px){
+  .web-grid{ grid-template-columns: 1fr; }
+  .logo-row{ grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .work-title{ font-size: 24px; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================
+   WORK EXPERIENCE — Figma-matched styling
+   ========================================= */
+.experience {
+  padding-top: 60px;   /* adds space above title */
+  padding-bottom: 40px; /* adds space below card */
+}
+
+
+.exp-title{
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #F5F7FA;              /* bright white like figma */
+  margin: 0 0 36px;            /* space under header (≈ 36 in figma) */
+}
+
+/* main container card */
+.exp-card{
+  background: #1B1B1B;         /* dark container tone from figma */
+  border: 1px solid #262A2E;   /* subtle border */
+  border-radius: 16px;
+  padding: 36px 32px;          /* top/btm 36 around the list */
+  box-shadow: 0 10px 24px rgba(0,0,0,.28); /* soft drop */
+}
+
+/* one experience row = logo | content | date */
+.exp-item{
+  display: grid;
+  grid-template-columns: 40px 1fr auto; /* fixed logo, fluid content, right date */
+  align-items: center;
+  column-gap: 18px;
+  row-gap: 6px;
+  padding: 28px 0;             /* vertical rhythm; with divider ≈ 65px */
+  position: relative;
+}
+.exp-item + .exp-item{
+  border-top: 1px solid rgba(255,255,255,.06); /* faint divider like figma */
+}
+
+/* left logo */
+.exp-logo{
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
+  box-shadow: 0 8px 20px rgba(0,0,0,.28);
+}
+
+/* middle content */
+.exp-company{
+  margin: 0;
+  font-weight: 700;
+  font-size: 24px;             /* bold company title */
+  line-height: 1.2;
+  color: #F9FAFB;
+}
+.exp-role{
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.55;
+  font-weight: 500;
+}
+.exp-role-title{               /* orange highlight */
+  color: #FD853A;
+  font-weight: 700;
+}
+.exp-muted{                    /* grey body line */
+  color: #9AA3AE;
+}
+.exp-sep{                      /* thin pipe color */
+  color: #6B7480;
+}
+
+/* right-aligned dates */
+.exp-date{
+  color: #E3E8EF;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  justify-self: end;           /* hard right edge alignment */
+  padding-left: 16px;          /* breathing room from text */
+}
+/* ---------------- Work Experience Wrapper ---------------- */
+.experience {
+  max-width: 820px;              /* reduced from 1040px */
+  margin: 194px auto 196px;        /* centered with breathing space */
+  padding: 0 16px;               /* wrap in smaller screens */
+}
+
+.exp-title {
+  font-size: 28px;               /* slightly smaller */
+  margin-bottom: 78px;           /* reduced space under title */
+}
+
+/* main card */
+.exp-card {
+  background: #1B1B1B;
+  border: 1px solid #262A2E;
+  border-radius: 14px;           /* slightly smaller corners */
+  padding: 28px 24px;            /* compact padding */
+  box-shadow: 0 8px 18px rgba(0,0,0,.25);
+}
+
+/* row items */
+.exp-item {
+  grid-template-columns: 36px 1fr auto; /* smaller logo col */
+  column-gap: 34px;
+  padding: 22px 0;              /* reduced vertical spacing */
+}
+
+.exp-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 7px;
+}
+
+/* content */
+.exp-company {
+  font-size: 20px;               /* slightly smaller */
+}
+
+.exp-role {
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+.exp-date {
+  font-size: 13px;
+  padding-left: 12px;
+}
+
+/* ---------------- Responsive tweaks ---------------- */
+@media (max-width: 768px) {
+  .experience {
+    max-width: 95%;
+  }
+  .exp-card {
+    padding: 22px 18px;
+  }
+  .exp-company {
+    font-size: 18px;
+  }
+  .exp-role {
+    font-size: 12px;
+  }
+}
+
+/* ----------------- Responsive ----------------- */
+@media (max-width: 900px){
+  .experience{ padding: 0 20px; }
+  .exp-card{ padding: 28px 22px; }
+  .exp-item{
+    grid-template-columns: 36px 1fr;    /* stack date below on small screens */
+    grid-template-areas:
+      "logo company"
+      "logo role"
+      ".    date";
+    align-items: start;
+    row-gap: 8px;
+  }
+  .exp-logo{ grid-area: logo; }
+  .exp-company{ grid-area: company; }
+  .exp-role{ grid-area: role; }
+  .exp-date{ grid-area: date; margin-top: 6px; }
+}
+
+@media (max-width: 560px){
+  .exp-title{ font-size: 26px; letter-spacing: .12em; }
+  .exp-company{ font-size: 20px; }
+  .exp-role{ font-size: 13px; }
+  .exp-logo{ width: 32px; height: 32px; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ================================
+   RECOMMENDATIONS (Figma-matched)
+   Palette:
+     bg card:   #1B1B1B
+     border:    #4D2B15
+     body 1:    #9D9D9D
+     body 2:    #838383
+     accent:    #E1AB20
+     white:     #FFFFFF
+   ================================ */
+
+.recs{
+  max-width: 1040px;
+  margin: 196px auto 0px;     /* section spacing */
+  padding: 0 24px;
+}
+.recs-title {
+  padding-top: 0px;   /* extra space above */
+  padding-bottom: 0px; /* extra space below */
+}
+
+.recs-title{
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-size: 32px;
+  text-align: center;
+  color: #FFFFFF;
+  margin: 0 0 70px;            /* matches the figma top gap */
+}
+
+.recs-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 44px;                   /* figma gutter ≈ 44px */
+}
+
+/* Card */
+.rec-card{
+  background: #1B1B1B;
+  border: 1px solid #4D2B15;
+  border-radius: 22px;         /* pill-like radius like figma */
+  padding: 28px 36px 26px;
+  text-align: center;
+  box-shadow: 0 8px 22px rgba(0,0,0,.28);
+}
+
+/* Quote */
+.rec-quote{
+  margin: 0 0 20px;
+  color: #9D9D9D;              /* body grey from palette */
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/* Name (gold) */
+.rec-name{
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 800;
+  color: #E1AB20;              /* accent gold */
+}
+
+/* Organization (lighter grey) */
+.rec-org{
+  margin: 0;
+  font-size: 12px;
+  color: #838383;
+}
+
+/* Optional: a subtle hover to match the orange-brown border vibe */
+.rec-card:hover{
+  box-shadow: 0 0 0 2px rgba(225,171,32,.18), 0 10px 24px rgba(0,0,0,.32);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px){
+  .recs-grid{ gap: 36px; }
+}
+@media (max-width: 900px){
+  .recs-title{ font-size: 28px; letter-spacing: .12em; margin-bottom: 48px; }
+  .recs-grid{ grid-template-columns: 1fr 1fr; gap: 28px; }
+}
+@media (max-width: 560px){
+  .recs-grid{ grid-template-columns: 1fr; gap: 20px; }
+  .rec-card{ padding: 22px 20px 20px; border-radius: 18px; }
+  .rec-quote{ font-size: 13px; }
+  .rec-name{ font-size: 16px; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ================================
+   CERTIFICATES — Figma-matched
+   ================================ */
+.certs{
+  max-width: 1040px;
+  margin: 196px auto 260px;     /* space around section */
+  padding: 0 24px;
+}
+.certs-title {
+  padding-top: 40px;   /* extra space above */
+  padding-bottom: 24px; /* extra space below */
+}
+
+.certs-title{
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-size: 32px;
+  text-align: center;
+  color: #FFFFFF;
+  margin: 0 0 36px;            /* ~36 above the card per Figma */
+}
+
+.certs-card{
+  background: #1B1B1B;         /* card bg */
+  border: 1px solid #262626;   /* subtle stroke */
+  border-radius: 16px;
+  padding: 36px 36px;          /* inner padding */
+  box-shadow: 0 8px 22px rgba(0,0,0,.25);
+}
+
+/* Grid: 4 columns, 60px col gap, 70px row gap (per Figma marks) */
+.certs-grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 60px;
+  row-gap: 70px;
+  place-items: center;         /* center every item */
+}
+
+.cert-item{
+  text-align: center;
+}
+
+.cert-icon{
+  width: 108px;                 /* icon size you showed */
+  height: 108px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 18px;
+  /* if the icon is monochrome svg/png, tint to figma grey: */
+  filter: brightness(0) saturate(100%) invert(24%) sepia(1%) saturate(0%) hue-rotate(177deg) brightness(96%) contrast(84%); /* approx #414141 */
+}
+
+.cert-name{
+  display: block;
+  font-size: 14px;
+  color: #FFFFFF;
+  opacity: .92;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px){
+  .certs-card{ padding: 28px; }
+  .certs-grid{ column-gap: 44px; row-gap: 56px; }
+}
+@media (max-width: 900px){
+  .certs-title{ font-size: 28px; letter-spacing: .12em; margin-bottom: 28px; }
+  .certs-grid{ grid-template-columns: repeat(3, 1fr); column-gap: 36px; row-gap: 44px; }
+  .cert-icon{ width: 96px; height: 96px; }
+}
+@media (max-width: 680px){
+  .certs-grid{ grid-template-columns: repeat(2, 1fr); column-gap: 28px; row-gap: 36px; }
+}
+@media (max-width: 420px){
+  .certs-grid{ grid-template-columns: 1fr; row-gap: 24px; }
+  .cert-icon{ width: 90px; height: 90px; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ================================
+   FOOTER / CONTACT (Figma-matched)
+   Colors used:
+   bg: #191919, border: #262626, text: #FFFFFF,
+   secondary text: rgba(255,255,255,.72), accent btn: #F35034
+   ================================ */
+
+.footer{
+  background: #191919;
+  border-top: 1px solid #262626;
+  padding: 80px 0;                     /* tall band like your screenshot */
+}
+
+.footer-inner{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1fr auto;     /* left block + CTA on the right */
+  align-items: end;
+  gap: 24px;
+}
+
+.footer-title{
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  color: #FFFFFF;
+  margin: 0 0 28px;
+}
+
+/* contact lines */
+.contact-list{
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px;
+  display: grid;
+  gap: 14px;
+}
+.contact-item{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: rgba(255,255,255,.72);         /* “Secondary Text” */
+  font-size: 15px;
+}
+.contact-item a{
+  color: rgba(255,255,255,.92);
+  text-decoration: none;
+}
+.contact-item a:hover{ text-decoration: underline; }
+.ci-icon{
+  width: 22px; height: 22px;
+  display: grid; place-items: center;
+  background: #262626;
+  color: #FFFFFF;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+/* socials row */
+.socials{
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  display: flex;
+  gap: 20px;
+}
+.socials a{
+  width: 36px; height: 36px;
+  border: 1px solid #262626;
+  border-radius: 10px;
+  display: grid; place-items: center;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  transition: transform .15s ease, background .15s ease, border-color .15s ease;
+}
+.socials a:hover{
+  transform: translateY(-2px);
+  border-color: #3a3a3a;
+  background: #202020;
+}
+
+/* CTA button */
+.hire-btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #F35034;                 /* accent */
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 12px 22px;
+  border-radius: 14px;
+  text-decoration: none;
+  box-shadow: 0 10px 22px rgba(243,80,52,.25);
+}
+.hire-ic{
+  width: 22px; height: 22px;
+  border: 1.4px solid rgba(255,255,255,.9);
+  border-radius: 6px;
+  display: grid; place-items: center;
+  font-size: 12px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 840px){
+  .footer-inner{
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .footer-right{
+    margin-top: 20px;
+  }
+  .hire-btn{ align-self: start; }
+}
+
+@media (max-width: 480px){
+  .footer{ padding: 64px 0; }
+  .footer-title{ font-size: 24px; }
+  .socials a{ width: 34px; height: 34px; border-radius: 8px; }
+  .hire-btn{ padding: 11px 18px; border-radius: 12px; }
+}
+footer {
+  padding: 40px 20px 80px; /* top, left-right, bottom */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ---------- HERO MICRO-INTERACTIONS (luxury + subtle) ---------- */
+
+/* CTA lift + soft glow + restartable sheen */
+.cta, .btn.primary{
+  position: relative;
+  overflow: hidden;
+  transition: transform .25s cubic-bezier(.22,.61,.36,1),
+              box-shadow .25s, background .25s;
+}
+.cta:hover, .btn.primary:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(0,0,0,.25),
+              0 6px 12px rgba(253,133,58,.25);
+}
+.cta.do-sheen::after, .btn.primary.do-sheen::after,
+.cta:hover::after, .btn.primary:hover::after{
+  content:"";
+  position:absolute; top:-150%; left:-30%;
+  width:60%; height:400%;
+  background: linear-gradient(120deg,
+              transparent 0%,
+              rgba(255,255,255,.35) 45%,
+              rgba(255,255,255,0) 60%);
+  transform: rotate(25deg);
+  animation: heroSheen 900ms ease-out forwards;
+  pointer-events:none;
+}
+@keyframes heroSheen{ to{ left:140%; } }
+
+/* Greeting pill: tiny lift + warm border glow */
+.greeting{
+  transition: transform .18s ease,
+              box-shadow .18s ease,
+              border-color .18s ease;
+}
+.greeting:hover{
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 8px 18px rgba(253,133,58,.12);
+  border-color: rgba(253,133,58,.45);
+}
+
+/* Portrait: gentle saturation, shadow; JS adds subtle parallax */
+.hero-portrait .portrait-img{
+  transition: transform .45s cubic-bezier(.22,.61,.36,1),
+              filter .45s, box-shadow .45s;
+  will-change: transform;
+  filter: saturate(96%);
+}
+.hero-portrait:hover .portrait-img{
+  filter: saturate(104%);
+  box-shadow: 0 35px 60px rgba(0,0,0,.35);
+}
+
+/* Name highlight: luxe underline + soft orange glow */
+.hero-title .highlight{
+  position: relative;
+  text-shadow: 0 0 0 rgba(253,133,58,0);
+  transition: text-shadow .35s ease;
+}
+.hero-title .highlight:hover{
+  text-shadow: 0 8px 22px rgba(253,133,58,.35);
+}
+.hero-title .highlight::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:-6px; height:2px;
+  background: linear-gradient(90deg,
+              rgba(253,133,58,0) 0%,
+              #FD853A 35%, #FD853A 65%,
+              rgba(253,133,58,0) 100%);
+  transform: scaleX(0);
+  transform-origin: 50% 50%;
+  transition: transform .45s cubic-bezier(.22,.61,.36,1);
+  opacity:.9;
+}
+.hero-title .highlight:hover::after{
+  transform: scaleX(1);
+}
+
+/* (optional) Social icons in hero, if present */
+.hero .social a{
+  display:inline-grid; place-items:center;
+  width:36px; height:36px; border-radius:10px;
+  transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+}
+.hero .social a:hover{
+  transform: translateY(-2px) scale(1.08);
+  background: rgba(255,255,255,.06);
+  box-shadow: 0 8px 16px rgba(0,0,0,.18);
+}
+.cta, .btn.primary {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s cubic-bezier(.22,.61,.36,1),
+              box-shadow 0.25s,
+              background 0.25s;
+}
+
+.cta:hover, .btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(0,0,0,.25),
+              0 6px 12px rgba(253,133,58,.25);
+}
+
+/* Restartable sheen — applied only with .do-sheen */
+.cta.do-sheen::after,
+.btn.primary.do-sheen::after {
+  content: "";
+  position: absolute;
+  top: -150%;
+  left: -30%;
+  width: 60%;
+  height: 400%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.35) 45%,
+    rgba(255, 255, 255, 0) 60%
+  );
+  transform: rotate(25deg);
+  animation: heroSheen 900ms ease-out;
+  pointer-events: none;
+}
+
+@keyframes heroSheen {
+  to { left: 140%; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Premium hover motion (no visuals added, motion only) */
+.lux-hover {
+  transition:
+    transform 240ms cubic-bezier(.22,.61,.36,1),
+    box-shadow 260ms ease,
+    filter 260ms ease,
+    color 260ms ease;
+  will-change: transform, box-shadow, filter;
+  backface-visibility: hidden; /* crisper on GPU */
+}
+
+/* lift + tiny scale + soft shadow */
+.lux-hover:hover {
+  transform: translateY(-6px) scale(1.012);
+  filter: brightness(1.02); /* very subtle pop without recolor */
+}
+
+/* icon/image floats a touch on hover */
+.lux-hover > img:first-child,
+.lux-hover > svg:first-child {
+  transition: transform 240ms cubic-bezier(.22,.61,.36,1), filter 240ms ease;
+  will-change: transform, filter;
+}
+.lux-hover:hover > img:first-child,
+.lux-hover:hover > svg:first-child {
+  transform: translateY(-4px);
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .lux-hover,
+  .lux-hover > img:first-child,
+  .lux-hover > svg:first-child {
+    transition: none !important;
+  }
+  .lux-hover:hover { transform: none; box-shadow: none; filter: none; }
+  .lux-hover:hover > img:first-child,
+  .lux-hover:hover > svg:first-child { transform: none; filter: none; }
+}
+/* toolkit items hover (images + labels) */
+.toolkit-item {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 240ms cubic-bezier(.22,.61,.36,1),
+              filter 240ms ease;
+  will-change: transform, filter;
+}
+
+.toolkit-item:hover {
+  transform: translateY(-6px) scale(1.05);
+  filter: brightness(1.05);
+}
+
+.toolkit-item img,
+.toolkit-item svg {
+  transition: transform 240ms cubic-bezier(.22,.61,.36,1),
+              filter 240ms ease;
+  will-change: transform, filter;
+}
+
+.toolkit-item:hover img,
+.toolkit-item:hover svg {
+  transform: translateY(-4px);
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,.25));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.card h3 {
+  text-align: center;
+  font-weight: 600;
+  padding-bottom: 16px;          /* extra breathing space below header */
+  position: relative;
+  transition: color 0.3s ease;   /* subtle fade */
+}
+
+.card h3::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;                     /* sits neatly at the padded bottom */
+  width: 0;
+  height: 2px;
+  background: rgba(255, 153, 20, 0.116);
+  border-radius: 2px;            /* soft edges = more premium */
+  transition: width 0.4s ease, left 0.4s ease;
+}
+
+.card h3:hover {
+  color: #fff;                   /* optional: brighten on hover */
+}
+
+.card h3:hover::after {
+  width: 40%;
+  left: 30%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ---------- Work Showcase – premium micro-interactions ---------- */
+
+/* Smooth default transitions */
+.work-card,
+.logo-band,
+.case-item__tile img,
+.ui-stack img,
+.web-item img,
+.logo-item img,
+.chip-arrow {
+  transition:
+    transform .55s cubic-bezier(.2,.8,.2,1),
+    box-shadow .55s cubic-bezier(.2,.8,.2,1),
+    filter .55s cubic-bezier(.2,.8,.2,1),
+    opacity .55s ease;
+  will-change: transform, filter;
+}
+
+/* Subtle lift on card hover */
+.work-card {
+  transform: translateY(0) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform-style: preserve-3d;               /* enables the gentle 3D tilt */
+}
+.work-card:hover {
+  transform: translateY(-4px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  box-shadow: 0 14px 28px rgba(0,0,0,.22);
+}
+
+/* Chip: soft halo only on hover (no extra shapes by default) */
+.chip-arrow { position: relative; }
+.chip-arrow::after{
+  content:"";
+  position:absolute;
+  inset:-4px;
+  border-radius:50%;
+  border:2px solid rgba(253,133,58,0);
+  transform: scale(.8);
+  opacity:0;
+  transition: .6s cubic-bezier(.2,.8,.2,1);
+}
+.work-card:hover .chip-arrow::after{
+  border-color: rgba(253,133,58,.35);
+  transform: scale(1.12);
+  opacity:1;
+}
+
+/* Case tiles: icon/image tiny nudge */
+.case-item__tile img{
+  transform: translateZ(0);
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,.25));
+}
+.case-item__tile:hover img{
+  transform: translateY(-6px) scale(1.02) rotate(-1.2deg);
+  filter: drop-shadow(0 12px 24px rgba(0,0,0,.35));
+}
+
+/* UI device stack – gentle float on hover */
+.ui-stack img:hover{
+  transform: translateY(-6px) scale(1.02);
+  filter: drop-shadow(0 14px 28px rgba(0,0,0,.35));
+}
+
+/* Web thumbnails – soft lift/glow */
+.web-item img{
+  transform: translateZ(0);
+}
+.web-item:hover img{
+  transform: translateY(-6px);
+  box-shadow: 0 14px 28px rgba(0,0,0,.28);
+}
+
+/* Logos row – crisp hover nudge */
+.logo-item img{ transform: translateY(0); }
+.logo-item:hover img{
+  transform: translateY(-6px) scale(1.03);
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.28));
+}
+
+/* Scroll-reveal: fade + rise (applied via JS) */
+[data-reveal]{
+  opacity:0;
+  transform: translateY(18px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+[data-reveal].in{
+  opacity:1;
+  transform:none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================
+   Work Experience – Micro-animations
+   ========================= */
+
+/* Smooth default */
+.exp-card,
+.exp-item,
+.exp-logo,
+.exp-company,
+.exp-date {
+  transition: transform .55s cubic-bezier(.2,.8,.2,1),
+              box-shadow .55s cubic-bezier(.2,.8,.2,1),
+              filter .55s cubic-bezier(.2,.8,.2,1),
+              opacity .55s ease;
+  will-change: transform, filter, opacity;
+}
+
+/* Section title: soft underline appears when revealed */
+.exp-title {
+  position: relative;
+}
+.exp-title::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%) scaleX(0);
+  bottom:-14px;                           /* keeps padding intact */
+  width: 160px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(255,255,255,.0), rgba(255, 255, 255, 0), rgba(255,255,255,.0));
+  transition: transform .8s cubic-bezier(.2,.8,.2,1);
+  transform-origin: center;
+}
+.exp-title.in::after{
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* Row hover: gentle lift + spotlight */
+.exp-item{
+  position: relative;
+  background: transparent;
+}
+.exp-item:hover{
+  transform: translateY(-3px);
+}
+.exp-item::before{
+  content:"";
+  position:absolute;
+  inset: -2px;                            /* tiny bleed for glow */
+  border-radius: 12px;
+  background: radial-gradient(120px 60px at 30% 50%, rgba(255,255,255,.06), transparent 70%);
+  opacity:0;
+  transition: opacity .45s ease;
+  pointer-events:none;
+}
+.exp-item:hover::before{ opacity:1; }
+
+/* Divider sweep (keeps existing border; adds animated sheen) */
+.exp-item + .exp-item{ position: relative; }
+.exp-item + .exp-item::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; top:-1px;
+  height:1px;
+  background:
+    linear-gradient(90deg,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,.35) 50%,
+      rgba(255,255,255,0) 100%);
+  background-size: 180% 100%;
+  background-position: -50% 0;
+  opacity:.0;
+  transition: opacity .35s ease, background-position .9s ease;
+  pointer-events:none;
+}
+.exp-item:hover + .exp-item::after,
+.exp-item + .exp-item:hover::after{
+  opacity:.55;
+  background-position: 150% 0;
+}
+
+/* Logo chip: tiny pop on row hover */
+.exp-item:hover .exp-logo{
+  transform: translateY(-2px) scale(1.05) rotate(1.2deg);
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,.25));
+}
+
+/* Company text: subtle rise for clarity */
+.exp-item:hover .exp-company{
+  transform: translateY(-1px);
+}
+
+/* Date: gentle nudge inward so it feels responsive */
+.exp-item:hover .exp-date{
+  transform: translateX(-4px);
+}
+
+/* Scroll-reveal (applied via JS) */
+.experience [data-reveal]{
+  opacity:0;
+  transform: translateY(18px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.experience [data-reveal].in{
+  opacity:1;
+  transform:none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================
+   Recommendations – Card Animations
+   ========================= */
+
+/* base smoothness */
+.rec-card {
+  transition: transform .6s cubic-bezier(.2,.8,.2,1),
+              box-shadow .6s cubic-bezier(.2,.8,.2,1),
+              border .6s cubic-bezier(.2,.8,.2,1),
+              filter .6s ease;
+  will-change: transform, box-shadow, border, filter;
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle hover lift + glow */
+.rec-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 28px rgba(0,0,0,.4);
+  border-color: rgba(255, 180, 40, .5); /* soft amber glow */
+}
+
+/* gradient sheen sweep */
+.rec-card::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(120deg,
+      transparent 0%,
+      rgba(255,255,255,.06) 45%,
+      rgba(255,255,255,.12) 55%,
+      transparent 100%);
+  background-size: 200% 100%;
+  background-position: -120% 0;
+  opacity:0;
+  transition: opacity .4s ease, background-position .9s ease;
+  pointer-events:none;
+}
+.rec-card:hover::after {
+  opacity:1;
+  background-position: 120% 0;
+}
+
+/* scroll reveal */
+.recommendations [data-reveal] {
+  opacity:0;
+  transform: translateY(20px) scale(.98);
+  transition: opacity .65s ease, transform .65s cubic-bezier(.2,.8,.2,1);
+}
+.recommendations [data-reveal].in {
+  opacity:1;
+  transform:none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================
+   Certificates – Premium Animations
+   ========================= */
+
+/* Try to catch typical item classnames inside .certificates */
+.certificates :is(.cert, .cert-card, .certificate, .certificate-item, .cert-item) {
+
+  position: relative;
+  transition:
+    transform .6s cubic-bezier(.2,.8,.2,1),
+    box-shadow .6s cubic-bezier(.2,.8,.2,1),
+    filter .6s ease;
+  will-change: transform, box-shadow, filter;
+  transform-style: preserve-3d; /* for subtle tilt */
+}
+
+/* Hover: gentle lift + soft glow */
+.certificates :is(.cert, .cert-card, .certificate, .certificate-item, .cert-item):hover {
+
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,.35);
+}
+
+/* Icon & caption assumptions:
+   - first image/svg inside the card is considered the icon
+   - caption is any direct small text, use a subtle up/fade on hover */
+.certificates :is(.cert, .cert-card, .certificate, .certificate-item) img,
+.certificates :is(.cert, .cert-card, .certificate, .certificate-item) svg {
+  display: block;
+  margin-inline: auto;
+  transition: transform .5s cubic-bezier(.2,.8,.2,1), filter .5s ease;
+  will-change: transform, filter;
+}
+
+/* slight “pop” on hover */
+.certificates :is(.cert, .cert-card, .certificate, .certificate-item):hover img,
+.certificates :is(.cert, .cert-card, .certificate, .certificate-item):hover svg {
+  transform: translateZ(2px) scale(1.035);
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,.25));
+}
+
+/* caption subtle rise */
+.certificates :is(.cert, .cert-card, .certificate, .certificate-item) :is(span,p,small,figcaption) {
+  transition: transform .45s ease, opacity .45s ease;
+  opacity: .9;
+}
+.certificates :is(.cert, .cert-card, .certificate, .certificate-item):hover :is(span,p,small,figcaption) {
+  transform: translateY(-2px);
+  opacity: 1;
+}
+
+/* classy sheen over icon on hover (replays every hover) */
+.certificates :is(.cert, .cert-card, .certificate, .certificate-item) .cert-sheen {
+  position: absolute;
+  top: 18%; left: 50%;
+  width: 140px; height: 140px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(closest-side, rgba(255,255,255,.22), rgba(255,255,255,0) 70%);
+  filter: blur(10px);
+  border-radius: 50%;
+}
+.certificates :is(.cert, .cert-card, .certificate, .certificate-item).shimmer .cert-sheen {
+  animation: certSheen 900ms ease forwards;
+}
+@keyframes certSheen {
+  0%   { opacity: 0; transform: translate(-50%, 15%) scale(.9); }
+  30%  { opacity: .35; }
+  60%  { opacity: .22; transform: translate(-50%, -10%) scale(1.05); }
+  100% { opacity: 0; transform: translate(-50%, -25%) scale(1.15); }
+}
+
+/* scroll-reveal in – with small rise */
+.certificates [data-cert-reveal]{
+  opacity: 0;
+  transform: translateY(16px) scale(.98);
+  transition: opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1);
+  will-change: opacity, transform;
+}
+.certificates [data-cert-reveal].in{
+  opacity: 1;
+  transform: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================
+   Certificates — Premium Hover Interaction
+   Works for both dark & light themes
+   ========================================= */
+
+/* Base card (covers common class names just in case) */
+.certificate-card,
+.cert-card,
+.certificate-item {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform .25s cubic-bezier(.25,.8,.25,1),
+    box-shadow .25s cubic-bezier(.25,.8,.25,1),
+    border-color .25s ease,
+    background-color .25s ease,
+    color .20s ease;
+  will-change: transform, box-shadow;
+}
+
+/* Shine bar (hidden until hover) */
+.certificate-card::after,
+.cert-card::after,
+.certificate-item::after {
+  content: "";
+  position: absolute;
+  inset: -40% -60%;
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,.15) 35%,
+    rgba(255,255,255,0) 70%
+  );
+  transform: translateX(-120%) rotate(12deg);
+  filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Lift + glow on hover */
+.certificate-card:hover,
+.cert-card:hover,
+.certificate-item:hover,
+.cert-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(191, 6, 6, 0);
+  border-color: rgba(253,133,58,.50);
+  color: #FD853A;
+  background-color: none; /* darker black */
+  /* OR try gradient */
+  /* background: linear-gradient(145deg, #1a1a1a, #111); */
+}
+
+
+
+/* Run the shine once per hover */
+.certificate-card:hover::after,
+.cert-card:hover::after,
+.certificate-item:hover::after {
+  opacity: 1;
+  animation: certShine 800ms cubic-bezier(.25,.8,.25,1);
+}
+
+@keyframes certShine {
+  from { transform: translateX(-120%) rotate(12deg); }
+  to   { transform: translateX(120%) rotate(12deg); }
+}
+
+/* If your certificate title/label uses specific classes, ensure they inherit */
+.certificate-card:hover .cert-title,
+.certificate-card:hover .cert-name,
+.certificate-card:hover .cert-label,
+.cert-card:hover .cert-title,
+.cert-card:hover .cert-name,
+.cert-card:hover .cert-label,
+.certificate-item:hover .cert-title,
+.certificate-item:hover .cert-name,
+.certificate-item:hover .cert-label,
+.cert-item:hover .cert-title,
+.cert-item:hover .cert-name,
+.cert-item:hover .cert-label {
+  color: #FD853A;
+}
+/* Smooth label color change for certificates */
+.cert-name { transition: color .25s ease; }
+
+
+/* Theme-friendly surface tweak on hover */
+html[data-theme="light"] .certificate-card:hover,
+html[data-theme="light"] .cert-card:hover,
+html[data-theme="light"] .certificate-item:hover {
+  background: #FFFFFF; /* keep crisp on light */
+}
+
+html:not([data-theme="light"]) .certificate-card:hover,
+html:not([data-theme="light"]) .cert-card:hover,
+html:not([data-theme="light"]) .certificate-item:hover {
+  background: #222;    /* a touch brighter than the dark card */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Case Study links: clickable with no underline */
+.work .case-list .case-item {
+  display: block;            /* whole tile is clickable */
+  text-decoration: none;     /* remove underline */
+  color: inherit;            /* keep your existing text color */
+}
+
+/* Make sure visited links don't get purple */
+.work .case-list .case-item:link,
+.work .case-list .case-item:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Label inside the tile should also never underline */
+.work .case-list .case-item .case-item__label {
+  text-decoration: none;
+}
+
+/* Cursor feedback (optional, nice UX) */
+.work .case-list .case-item .case-item__tile {
+  cursor: pointer;
+}
+/* Remove the orange ↗ chip from all cards */
+.chip-arrow {
+  display: none !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================
+   Global Scroll Reveal
+   - .reveal : base hidden state
+   - .is-inview : visible state (added/removed by JS)
+   - Uses transform+opacity only (GPU-friendly)
+   ========================================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 520ms cubic-bezier(.2,.7,.2,1),
+    transform 520ms cubic-bezier(.2,.7,.2,1);
+  will-change: opacity, transform;
+  /* optional stagger: JS sets --rev-i on siblings */
+  transition-delay: calc(var(--rev-i, 0) * 60ms);
+}
+
+.reveal.is-inview {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   Recommendations — 3D pop/tilt on hover (scoped)
+   Works with your scroll-reveal by composing transforms
+   ========================================================= */
+
+/* Give the section a perspective; supports either id or class */
+#recommendations,
+.recs { perspective: 900px; }
+
+/* Base transform composed from 3 vars:
+   --revY  : reveal translateY (set below and by JS reveal)
+   --rx/--ry : tilt angles set by JS pointermove
+*/
+#recommendations .rec-card,
+.recs .rec-card {
+  transform: translateY(var(--revY, 0px))
+             rotateX(var(--rx, 0deg))
+             rotateY(var(--ry, 0deg))
+             translateZ(0);
+  transition: transform 160ms cubic-bezier(.2,.7,.2,1),
+              box-shadow 160ms cubic-bezier(.2,.7,.2,1);
+  will-change: transform;
+}
+
+/* Nice lift shadow on hover */
+#recommendations .rec-card:hover,
+.recs .rec-card:hover {
+  box-shadow: 0 18px 40px rgba(0,0,0,.28);
+}
+
+/* Integrate with your global .reveal logic:
+   we mirror the "from" and "to" state using --revY
+   so transforms don't conflict */
+#recommendations .rec-card.reveal,
+.recs .rec-card.reveal {
+  --revY: 14px;
+  opacity: 0;
+  transition: opacity 520ms cubic-bezier(.2,.7,.2,1),
+              transform 160ms cubic-bezier(.2,.7,.2,1);
+}
+
+#recommendations .rec-card.reveal.is-inview,
+.recs .rec-card.reveal.is-inview {
+  --revY: 0px;
+  opacity: 1;
+}
+
+/* Reduced motion: no tilt, no animation jitter */
+@media (prefers-reduced-motion: reduce) {
+  #recommendations .rec-card,
+  .recs .rec-card {
+    transform: none !important;
+    transition: none !important;
+  }
+}
